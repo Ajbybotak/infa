@@ -1,0 +1,17 @@
+int main()
+{
+    ifstream wejscie("tekst_jawny.txt");
+    ofstream wyjscie("szyfrogram.txt");
+    string s;
+    int klucz;
+    cout<<"Klucz: "; cin>>klucz;
+    while (!wejscie.eof())
+    {
+        getline(wejscie,s);
+        wyjscie<<Cezar(s,klucz)<<endl;
+    }
+    wejscie.close();
+    wyjscie.close();
+    cout<<"Plik szyfrogram.txt zostal utworzony";
+    return 0;
+}
