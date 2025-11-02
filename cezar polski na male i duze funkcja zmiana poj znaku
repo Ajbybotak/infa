@@ -1,7 +1,7 @@
 char Cezar_PL(char znak, int klucz)
 {
   int i = alfabet_m.find(znak);
-  if (i>0 && i<35)
+  if (i>=0 && i<35)
   {
     i = (i + klucz)%35;
     return alfabet_m[i];
