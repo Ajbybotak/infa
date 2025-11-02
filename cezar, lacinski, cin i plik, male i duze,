@@ -1,0 +1,11 @@
+for (i=0; i<t_jawny.size(); i++)
+{
+    if (toupper(t_jawny[i])>='A' && toupper(t_jawny[i])<='Z')
+    {
+        kod=t_jawny[i]+klucz;
+        if ((t_jawny[i]<='Z' && kod>'Z') ||
+            (t_jawny[i]>='a' && kod>'z')) kod=kod-26;
+        szyfrogram=szyfrogram+char(kod);
+    }
+    else szyfrogram=szyfrogram+t_jawny[i];
+}
