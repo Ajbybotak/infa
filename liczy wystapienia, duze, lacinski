@@ -1,5 +1,3 @@
-//liczy wystapienia liter, duze litery, lacinski
-
 int main() {
     int i;
     string napis;
