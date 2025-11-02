@@ -1,0 +1,21 @@
+int main()
+{
+    string t_jawny, szyfrogram = "";
+    int i, klucz;
+    int kod;
+
+    cout << "Tekst jawny: ";
+    cin >> t_jawny;
+    cout << "Klucz: ";
+    cin >> klucz;
+
+    for (i = 0; i < t_jawny.size(); i++)
+    {
+        kod = t_jawny[i] + klucz;
+        if (kod > 'Z') kod = kod - 26;
+        szyfrogram = szyfrogram + char(kod);
+    }
+
+    cout << "Szyfrogram: " << szyfrogram;
+    return 0;
+}
