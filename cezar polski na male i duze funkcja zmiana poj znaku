@@ -1,3 +1,6 @@
+const string alfabet_m="aąbcćdeęfghijklłmnńoóprsśtuvwxyzźż";
+const string alfabet_w="AĄBCĆDEĘFGHIJKLŁMNŃOÓPRSŚTUVWXYZŹŻ";
+
 char Cezar_PL(char znak, int klucz)
 {
   int i = alfabet_m.find(znak);
