@@ -10,3 +10,13 @@ void Sortuj(string &s)
         ch = s[i]; s[i] = s[m]; s[m] = ch;
     }
 }
+
+
+
+bool Anagramy(string s1, string s2)
+{
+    if (s1.size() != s2.size()) return false;
+    Sortuj(s1);
+    Sortuj(s2);
+    return (s1 == s2);
+}
