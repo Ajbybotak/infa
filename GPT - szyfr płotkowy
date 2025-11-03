@@ -1,0 +1,54 @@
+string szyfrujPłotkowy(const string& tekst, int klucz) {
+    if (klucz == 1) {
+        return tekst;
+    }
+
+    int n = tekst.length();
+    string wynik = "";
+    char tabela[klucz][n];
+    
+    for (int i = 0; i < klucz; ++i) {
+        for (int j = 0; j < n; ++j) {
+            tabela[i][j] = '\0';
+        }
+    }
+
+    int index = 0;
+    bool kierunek = false;
+    int wiersz = 0;
+
+    for (int i = 0; i < n; ++i) {
+        tabela[wiersz][i] = tekst[i];
+        if (wiersz == 0 || wiersz == klucz - 1) {
+            kierunek = !kierunek;
+        }
+        wiersz += (kierunek) ? 1 : -1;
+    }
+
+    for (int i = 0; i < klucz; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (tabela[i][j] != '\0') {
+                wynik += tabela[i][j];
+            }
+        }
+    }
+
+    return wynik;
+}
+
+int main() {
+    string tekst;
+    int klucz;
+
+    cout << "Podaj tekst do zaszyfrowania: ";
+    getline(cin, tekst);
+
+    cout << "Podaj liczbę wierszy (klucz): ";
+    cin >> klucz;
+
+    string zaszyfrowanyTekst = szyfrujPłotkowy(tekst, klucz);
+
+    cout << "Zaszyfrowany tekst: " << zaszyfrowanyTekst << endl;
+
+    return 0;
+}
