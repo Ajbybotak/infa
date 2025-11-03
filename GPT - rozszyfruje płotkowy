@@ -5,12 +5,6 @@ string rozszyfrujPłotkowy(const string& tekst, int klucz) {
 
     int n = tekst.length();
     char tabela[klucz][n];
-    for (int i = 0; i < klucz; ++i) {
-        for (int j = 0; j < n; ++j) {
-            tabela[i][j] = '\0';
-        }
-    }
-
     int index = 0;
     bool kierunek = false;
     int wiersz = 0;
