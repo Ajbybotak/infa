@@ -1,0 +1,39 @@
+string rozszyfrujKolumnowy(const string& tekst, int kolumny) {
+    int n = tekst.length();
+    int wiersze = n / kolumny;
+    
+    char tabela[wiersze][kolumny];
+    int index = 0;
+
+    for (int j = 0; j < kolumny; ++j) {
+        for (int i = 0; i < wiersze; ++i) {
+            tabela[i][j] = tekst[index++];
+        }
+    }
+
+    string wynik = "";
+    for (int i = 0; i < wiersze; ++i) {
+        for (int j = 0; j < kolumny; ++j) {
+            wynik += tabela[i][j];
+        }
+    }
+
+    return wynik;
+}
+
+int main() {
+    string tekst;
+    int kolumny;
+
+    cout << "Podaj zaszyfrowany tekst: ";
+    getline(cin, tekst);
+    
+    cout << "Podaj liczbę kolumn (klucz): ";
+    cin >> kolumny;
+
+    string odszyfrowanyTekst = rozszyfrujKolumnowy(tekst, kolumny);
+
+    cout << "Odszyfrowany tekst: " << odszyfrowanyTekst << endl;
+
+    return 0;
+}
