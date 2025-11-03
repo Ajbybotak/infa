@@ -1,0 +1,21 @@
+bool czyAnagram(const string& a, const string& b) {
+    string copy_a = a;
+    string copy_b = b;
+    sort(copy_a.begin(), copy_a.end());
+    sort(copy_b.begin(), copy_b.end());
+    return copy_a == copy_b;
+}
+
+int main() {
+    ifstream plik("dane.txt");
+    string slowo1, slowo2;
+
+    while (plik >> slowo1 >> slowo2) {
+        if (czyAnagram(slowo1, slowo2)) {
+            cout << "Anagramy: " << slowo1 << " i " << slowo2 << endl;
+        }
+    }
+
+    plik.close();
+    return 0;
+}
