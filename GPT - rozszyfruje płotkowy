@@ -1,0 +1,65 @@
+string rozszyfrujPłotkowy(const string& tekst, int klucz) {
+    if (klucz == 1) {
+        return tekst;
+    }
+
+    int n = tekst.length();
+    char tabela[klucz][n];
+    for (int i = 0; i < klucz; ++i) {
+        for (int j = 0; j < n; ++j) {
+            tabela[i][j] = '\0';
+        }
+    }
+
+    int index = 0;
+    bool kierunek = false;
+    int wiersz = 0;
+
+    for (int i = 0; i < n; ++i) {
+        tabela[wiersz][i] = tekst[index++];
+        if (wiersz == 0 || wiersz == klucz - 1) {
+            kierunek = !kierunek;
+        }
+
+        if (kierunek) {
+            wiersz++;
+        } else {
+            wiersz--;
+        }
+    }
+
+    string wynik = "";
+    wiersz = 0;
+    kierunek = false;
+    for (int i = 0; i < n; ++i) {
+        wynik += tabela[wiersz][i];
+        if (wiersz == 0 || wiersz == klucz - 1) {
+            kierunek = !kierunek;
+        }
+
+        if (kierunek) {
+            wiersz++;
+        } else {
+            wiersz--;
+        }
+    }
+
+    return wynik;
+}
+
+int main() {
+    string tekst;
+    int klucz;
+
+    cout << "Podaj zaszyfrowany tekst: ";
+    getline(cin, tekst);
+
+    cout << "Podaj liczbę wierszy (klucz): ";
+    cin >> klucz;
+
+    string odszyfrowanyTekst = rozszyfrujPłotkowy(tekst, klucz);
+
+    cout << "Odszyfrowany tekst: " << odszyfrowanyTekst << endl;
+
+    return 0;
+}
