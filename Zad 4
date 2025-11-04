@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include <algorithm>
 using namespace std;
 
@@ -14,13 +13,14 @@ int main() {
     int kolumny = klucz.length();
     int wiersze = tekst.length() / kolumny;
 
-    vector<int> indeksy(kolumny);
+    int indeksy[100];
     for (int i = 0; i < kolumny; i++) indeksy[i] = i;
-    sort(indeksy.begin(), indeksy.end(), [&](int a, int b) {
+
+    sort(indeksy, indeksy + kolumny, [&](int a, int b) {
         return klucz[a] < klucz[b];
     });
 
-    vector<vector<char>> tab(wiersze, vector<char>(kolumny));
+    char tab[100][100];
     int idx = 0;
     for (int x = 0; x < kolumny; x++)
         for (int i = 0; i < kolumny; i++)
