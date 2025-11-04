@@ -1,1 +1,54 @@
-coś
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main() {
+    ifstream wej("wejscie.txt");
+    if (!wej) {
+        cout << "Blad: brak pliku wejscie.txt" << endl;
+        return 1;
+    }
+
+    string tekst;
+    getline(wej, tekst, '\0');  // czytamy caly plik
+    wej.close();
+
+    // Usuwamy spacje i zmieniamy na duze litery
+    string czysty = "";
+    for (char c : tekst)
+        if (c != ' ') czysty += toupper(c);
+
+    // Tworzymy kwadratowa tablice
+    int n = 1;
+    while (n * n < czysty.length()) n++;
+    vector<vector<char>> tab(n, vector<char>(n, 'X')); // wypelnienie X
+
+    // Wpisujemy tekst wierszami
+    int idx = 0;
+    for (int i = 0; i < n && idx < czysty.length(); i++)
+        for (int j = 0; j < n && idx < czysty.length(); j++)
+            tab[i][j] = czysty[idx++];
+
+    // Odczyt po spirali (zgodnie z ruchem wskazówek zegara)
+    string wynik = "";
+    int g = 0, d = n - 1, l = 0, p = n - 1;
+    while (g <= d && l <= p) {
+        for (int j = l; j <= p; j++) wynik += tab[g][j];
+        g++;
+        for (int i = g; i <= d; i++) wynik += tab[i][p];
+        p--;
+        for (int j = p; j >= l && g <= d; j--) wynik += tab[d][j];
+        d--;
+        for (int i = d; i >= g && l <= p; i--) wynik += tab[i][l];
+        l++;
+    }
+
+    ofstream wyj("wynik.txt");
+    wyj << wynik;
+    wyj.close();
+
+    cout << "Tekst zaszyfrowano metoda spiralna i zapisano w pliku wynik.txt" << endl;
+    return 0;
+}
