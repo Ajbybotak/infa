@@ -1,1 +1,27 @@
-cś
+#include <iostream>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+int main() {
+    string s1, s2;
+
+    cout << "Podaj pierwsze slowo: ";
+    cin >> s1;
+    cout << "Podaj drugie slowo: ";
+    cin >> s2;
+
+    // Zamiana liter na duze
+    for (char &c : s1) c = toupper(c);
+    for (char &c : s2) c = toupper(c);
+
+    sort(s1.begin(), s1.end());
+    sort(s2.begin(), s2.end());
+
+    if (s1 == s2)
+        cout << "To sa anagramy." << endl;
+    else
+        cout << "To NIE sa anagramy." << endl;
+
+    return 0;
+}
