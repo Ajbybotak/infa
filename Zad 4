@@ -1,1 +1,39 @@
-coś
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    string tekst, klucz;
+    cout << "Podaj tekst zaszyfrowany (DUZE LITERY, BEZ SPACJI): ";
+    cin >> tekst;
+    cout << "Podaj klucz (slowo): ";
+    cin >> klucz;
+
+    int kolumny = klucz.length();
+    int wiersze = tekst.length() / kolumny;
+
+    // Kolejnosc kolumn wg liter w kluczu
+    vector<int> indeksy(kolumny);
+    for (int i = 0; i < kolumny; i++) indeksy[i] = i;
+    sort(indeksy.begin(), indeksy.end(), [&](int a, int b) {
+        return klucz[a] < klucz[b];
+    });
+
+    // Wpisujemy litery do kolumn w ustalonej kolejnosci
+    vector<vector<char>> tab(wiersze, vector<char>(kolumny));
+    int idx = 0;
+    for (int k : indeksy)
+        for (int i = 0; i < wiersze; i++)
+            tab[i][k] = tekst[idx++];
+
+    // Odczyt wierszami
+    string wynik = "";
+    for (int i = 0; i < wiersze; i++)
+        for (int j = 0; j < kolumny; j++)
+            wynik += tab[i][j];
+
+    cout << "Odszyfrowany tekst: " << wynik << endl;
+    return 0;
+}
