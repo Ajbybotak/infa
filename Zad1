@@ -1,1 +1,25 @@
-coś
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string tekst, wynik = "";
+    int klucz;
+
+    cout << "Podaj tekst do zaszyfrowania (DUZE LITERY): ";
+    getline(cin, tekst);
+
+    cout << "Podaj klucz (moze byc ujemny): ";
+    cin >> klucz;
+
+    for (int i = 0; i < tekst.length(); i++) {
+        char z = tekst[i];
+        if (z >= 'A' && z <= 'Z') {
+            z = ((z - 'A' + klucz) % 26 + 26) % 26 + 'A';  // cykliczne przesuniecie
+        }
+        wynik += z;
+    }
+
+    cout << "Zaszyfrowany tekst: " << wynik << endl;
+    return 0;
+}
