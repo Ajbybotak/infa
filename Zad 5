@@ -1,47 +1,49 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
 using namespace std;
 
 int main() {
     ifstream wej("wejscie.txt");
     if (!wej) {
-        cout << "Blad: brak pliku wejscie.txt" << endl;
+        cout << "Blad brak pliku wejscie.txt" << endl;
         return 1;
     }
 
-    string tekst;
-    getline(wej, tekst, '\0');  // czytamy caly plik
+    string tekst, linia;
+    while (getline(wej, linia)) tekst += linia;
     wej.close();
 
-    // Usuwamy spacje i zmieniamy na duze litery
-    string czysty = "";
-    for (char c : tekst)
-        if (c != ' ') czysty += toupper(c);
+    string czysty;
+    for (int i = 0; i < tekst.length(); i++)
+        if (tekst[i] != ' ') czysty += toupper(tekst[i]);
 
-    // Tworzymy kwadratowa tablice
     int n = 1;
     while (n * n < czysty.length()) n++;
-    vector<vector<char>> tab(n, vector<char>(n, 'X')); // wypelnienie X
 
-    // Wpisujemy tekst wierszami
+    char tab[200][200];
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            tab[i][j] = 'X';
+
     int idx = 0;
     for (int i = 0; i < n && idx < czysty.length(); i++)
         for (int j = 0; j < n && idx < czysty.length(); j++)
             tab[i][j] = czysty[idx++];
 
-    // Odczyt po spirali (zgodnie z ruchem wskazówek zegara)
-    string wynik = "";
+    string wynik;
+    wynik.resize(n * n);
     int g = 0, d = n - 1, l = 0, p = n - 1;
+    idx = 0;
+
     while (g <= d && l <= p) {
-        for (int j = l; j <= p; j++) wynik += tab[g][j];
+        for (int j = l; j <= p; j++) wynik[idx++] = tab[g][j];
         g++;
-        for (int i = g; i <= d; i++) wynik += tab[i][p];
+        for (int i = g; i <= d; i++) wynik[idx++] = tab[i][p];
         p--;
-        for (int j = p; j >= l && g <= d; j--) wynik += tab[d][j];
+        for (int j = p; j >= l && g <= d; j--) wynik[idx++] = tab[d][j];
         d--;
-        for (int i = d; i >= g && l <= p; i--) wynik += tab[i][l];
+        for (int i = d; i >= g && l <= p; i--) wynik[idx++] = tab[i][l];
         l++;
     }
 
