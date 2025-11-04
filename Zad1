@@ -3,23 +3,24 @@
 using namespace std;
 
 int main() {
-    string tekst, wynik = "";
+    string tekst, wynik;
     int klucz;
 
-    cout << "Podaj tekst do zaszyfrowania (DUZE LITERY): ";
+    cout << "Podaj tekst do zaszyfrowania (DUZE LITERY) ";
     getline(cin, tekst);
 
-    cout << "Podaj klucz (moze byc ujemny): ";
+    cout << "Podaj klucz (moze byc ujemny) ";
     cin >> klucz;
 
+    wynik.resize(tekst.length());
     for (int i = 0; i < tekst.length(); i++) {
         char z = tekst[i];
         if (z >= 'A' && z <= 'Z') {
-            z = ((z - 'A' + klucz) % 26 + 26) % 26 + 'A';  // cykliczne przesuniecie
+            z = ((z - 'A' + klucz) % 26 + 26) % 26 + 'A';
         }
-        wynik += z;
+        wynik[i] = z;
     }
 
-    cout << "Zaszyfrowany tekst: " << wynik << endl;
+    cout << "Zaszyfrowany tekst " << wynik << endl;
     return 0;
 }
