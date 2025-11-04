@@ -1,1 +1,29 @@
-coś
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string tekst, wynik = "";
+    int klucz_parzysty, klucz_nieparzysty;
+
+    cout << "Podaj tekst (DUZE LITERY): ";
+    getline(cin, tekst);
+
+    cout << "Podaj klucz dla liter na pozycjach NIEPARZYSTYCH: ";
+    cin >> klucz_nieparzysty;
+
+    cout << "Podaj klucz dla liter na pozycjach PARZYSTYCH: ";
+    cin >> klucz_parzysty;
+
+    for (int i = 0; i < tekst.length(); i++) {
+        char z = tekst[i];
+        if (z >= 'A' && z <= 'Z') {
+            int klucz = (i % 2 == 0) ? klucz_nieparzysty : klucz_parzysty;
+            z = ((z - 'A' + klucz) % 26 + 26) % 26 + 'A';
+        }
+        wynik += z;
+    }
+
+    cout << "Zaszyfrowany tekst: " << wynik << endl;
+    return 0;
+}
